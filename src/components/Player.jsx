@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Player = ({ name, symbol }) => {
+const Player = ({ name, symbol, isActive }) => {
   // edit여부 상태 셍성
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(name);
@@ -26,7 +26,7 @@ const Player = ({ name, symbol }) => {
   const btnCaption = isEditing ? "Save" : "Edit";
 
   return (
-    <li>
+    <li className={`${isActive ? "active" : ""}`}>
       <span className="player">
         <span className="player-name">{playerName}</span>
         <span className="player-symbol">{symbol}</span>

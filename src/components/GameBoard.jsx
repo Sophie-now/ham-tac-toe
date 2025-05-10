@@ -1,18 +1,30 @@
-const initialGameBoard = [
+const gameBoard = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
-export const GameBoard = () => {
+const GameBoard = ({ onSelectBox, turns }) => {
+  for (const turn of turns) {
+    const rowIdx = turn.square.row;
+    const colIdx = turn.square.col;
+    // gameBoard 에 업데이트
+    gameBoard[rowIdx][colIdx] = turn.player;
+  }
+
   return (
     <ol id="game-board">
-      {initialGameBoard.map((row, rowIdx) => (
+      {gameBoard.map((row, rowIdx) => (
         <li key={rowIdx}>
           <ol>
-            {row.map((playerSymbol, colIndex) => (
-              <li key={colIndex}>
-                <button>{playerSymbol}</button>
+            {row.map((playerSymbol, colIdx) => (
+              <li key={colIdx}>
+                <button
+                  onClick={() => onSelectBox(rowIdx, colIdx)}
+                  // disabled={playerSymbol !== null}
+                >
+                  {playerSymbol}
+                </button>
               </li>
             ))}
           </ol>
@@ -21,3 +33,4 @@ export const GameBoard = () => {
     </ol>
   );
 };
+export default GameBoard;
